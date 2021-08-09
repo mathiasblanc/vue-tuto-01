@@ -8,6 +8,7 @@
         :class="{ 'has-error': submitting && invalidName }"
         @focus="clearStatus"
         @keypress="clearStatus"
+        ref="first"
       />
       <label>Employee email</label>
       <input
@@ -52,6 +53,7 @@ export default {
       }
 
       this.$emit("add:employee", this.employee);
+      this.$refs.first.focus();
 
       this.employee = {
         name: "",
