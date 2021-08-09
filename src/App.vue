@@ -2,7 +2,11 @@
   <div id="app" class="small-container">
     <h1>Employees</h1>
     <employee-form @add:employee="addEmployee" />
-    <employee-table :employees="employees" />
+    <employee-table
+      :employees="employees"
+      @delete:employee="deleteEmployee"
+      @edit:employee="editEmployee"
+    />
   </div>
 </template>
 
@@ -49,6 +53,16 @@ export default {
 
       this.employees = [...this.employees, newEmployee];
     },
+
+    deleteEmployee(id) {
+      this.employees = this.employees.filter((e) => e.id !== id);
+    },
+
+    editEmployee(id, updatedEmployee) {
+      this.employees = this.employees.map((e) =>
+        e.id === id ? updatedEmployee : e
+      );
+    },
   },
 };
 </script>
@@ -60,6 +74,6 @@ button {
 }
 
 .small-container {
-  max-width: 680px;
+  max-width: 720px;
 }
 </style>
